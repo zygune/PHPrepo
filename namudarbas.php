@@ -41,9 +41,9 @@ for ($i = 0; $i < count($a); $i++) {
 //Masyvo stulpeliu suma
 
 /*$array = [
-    [3, 2, 7, 4],
-    [10, 7, 9, 5],
-    [9, 11, 8, 14]
+    [3, 2, 7, 3],
+    [10, 8, 9, 5],
+    [9, 11, 15, 14]
 ];
 $x = 0;
 for ($i = 0; $i < count($array[0]); $i++) {
@@ -54,7 +54,7 @@ for ($i = 0; $i < count($array[0]); $i++) {
     $x = 0;
 }*/
 
-//Istrizainiu suma nesigauna padaryti.
+//Istrizainiu suma neiseina padaryti.
 
 
 ?>
