@@ -1,18 +1,5 @@
 <?php
-
-
-$servername = 'localhost';
-$dbname = 'auto';
-$username = 'auto';
-$password = 'LabaiSlaptas123';
-
-//Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-//Check connection
-if ($conn->connect_error) {
-    die('Nepavyko prisjungti: ' . $conn->connect_error);
-}
+require_once "functions.php";
 
 $sql = "SELECT * FROM radars";
 
@@ -36,5 +23,5 @@ if ($result->num_rows > 0) {
 }
 
 
-$conn->close();
+
 
