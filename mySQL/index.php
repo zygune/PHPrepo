@@ -22,18 +22,22 @@
             border-radius: 10px;
             padding: 5px
         }
+
     </style>
 </head>
 <body>
+<center>
 <form method="POST" action="">
-    <input type="number" placeholder="Write id to delete/update" name="id" >
-    <input type="submit"  value="DELETE">
+    <!--<input type="number" placeholder="Write id to delete/update" name="id" >
+    <input type="submit"  value="DELETE">-->
+    <input name="id" type="number" placeholder="just id to delete row">
     <input name="date" type="date" placeholder="date">
     <input name="number" type="text" placeholder="number">
     <input name="distance" type="number" placeholder="distance">
     <input name="time" type="number" placeholder="time">
-    <input type="submit" value="insert/update">
+    <input name="submit" type="submit" value="insert/update/delete">
 </form>
+</center>
 <table>
     <thead>
         <tr>
@@ -51,22 +55,29 @@
 <?php
 require_once "functions.php";
 
-// sql to delete a record
-if (!empty($_REQUEST['id'])) {
-    $sql = $conn->prepare("DELETE FROM radars WHERE id = ?");
-    $sql->bind_param("i", $_REQUEST['id']);
-    $sql->execute();
-// sql to insert new data
-}elseif (!empty($_REQUEST['date']) && !empty($_REQUEST['number']) && !empty($_REQUEST['distance']) && !empty($_REQUEST['time'])){
-    $sql = $conn->prepare("INSERT INTO radars (date, number, distance, time) VALUE (?, ?, ?, ?)");
-    $sql->bind_param("ssdd", $_REQUEST['date'], $_REQUEST['number'], $_REQUEST['distance'], $_REQUEST['time']);
-    $sql->execute();
 //sql to update data
-}elseif (!empty($_REQUEST['date']) && !empty($_REQUEST['number']) && !empty($_REQUEST['distance']) && !empty($_REQUEST['time']) && !empty($_REQUEST['id'])) {
+if (!empty($_REQUEST['id']) && !empty($_REQUEST['date']) && !empty($_REQUEST['number']) && !empty($_REQUEST['distance']) && !empty($_REQUEST['time'])) {
     $sql = $conn->prepare("UPDATE radars SET date = ?, number = ?, distance = ?, time = ? WHERE id = ?");
     $sql->bind_param("ssddi", $_REQUEST['date'], $_REQUEST['number'], $_REQUEST['distance'], $_REQUEST['time'], $_REQUEST['id']);
     $sql->execute();
+
+// sql to insert new data
+}elseif (!empty($_REQUEST['date']) && !empty($_REQUEST['number']) && !empty($_REQUEST['distance']) && !empty($_REQUEST['time'])) {
+    $sql = $conn->prepare("INSERT INTO radars(date, number, distance, time) VALUE (?, ?, ?, ?)");
+    $sql->bind_param("ssdd", $_REQUEST['date'], $_REQUEST['number'], $_REQUEST['distance'], $_REQUEST['time'] );
+    $sql->execute();
+
+// sql to delete a record
+}elseif (!empty($_REQUEST['id'])) {
+    $sql = $conn->prepare("DELETE FROM radars WHERE id = ?");
+    $sql->bind_param("i", $_REQUEST['id']);
+    $sql->execute();
 }
+
+
+
+
+
 
 $conn->close();
 
